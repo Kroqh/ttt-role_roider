@@ -18,7 +18,7 @@ function ROLE:PreInitialize()
 
     -- do settings
     self.conVarData = {
-        pct          = 0.5, -- necessary: percentage of getting this role selected (per player)
+        pct          = 0.25, -- necessary: percentage of getting this role selected (per player)
         maximum      = 1, -- maximum amount of roles in a round
         minPlayers   = 5, -- minimum amount of players until this role is able to get selected
         togglable    = true, -- option to toggle a role for a client if possible (F1 menu)
@@ -70,4 +70,17 @@ if SERVER then
       end
     end)
 
+end
+if CLIENT then
+	function ROLE:AddToSettingsMenu(parent)
+		local form = vgui.CreateTTT2Form(parent, "header_roles_additional")
+
+		form:MakeSlider({
+			serverConvar = "ttt2_roid_cbdmg",
+			label = "Crowbar damage",
+			min = 0,
+			max = 100,
+			decimal = 0
+		})
+	end
 end

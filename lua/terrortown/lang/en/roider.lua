@@ -4,6 +4,8 @@ L = LANG.GetLanguageTableReference("en")
 L[ROIDER.name] = "Roider"
 L["info_popup_" .. ROIDER.name] = [[You are the Roider!
 You are consumed by roid rage, very strong but unable to aim properly]]
+L["info_popup_roider_alone_" .. ROIDER.name] = [[You are the Roider!
+You are consumed by roid rage, very strong but unable to aim properly]]
 L["body_found_" .. ROIDER.abbr] = "They were a Roider."
 L["search_role_" .. ROIDER.abbr] = "This person was a Roider!"
 L["target_" .. ROIDER.name] = "Roider"

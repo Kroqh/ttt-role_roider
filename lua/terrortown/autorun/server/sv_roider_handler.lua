@@ -11,14 +11,11 @@ end
 hook.Add("PlayerTakeDamage", "RoiderNoDamage", function(ply, inflictor, killer, amount, dmginfo)
 
     if not ShouldRoiderDealNoDamage(ply, killer) then return end
-    print(killer:GetActiveWeapon():GetClass())
-    print(killer)
-    print(amount)
+    
     if  inflictor ~= killer and killer:GetActiveWeapon():GetClass() == "weapon_zm_improvised" then
-        dmginfo:SetDamage(50)
+        dmginfo:SetDamage(GetConVar("ttt2_roid_cbdmg"):GetInt())
     else
     
-        print("FSDFSD")
         dmginfo:ScaleDamage(0)
 	    dmginfo:SetDamage(0)
     end
