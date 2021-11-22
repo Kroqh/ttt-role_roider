@@ -80,7 +80,7 @@ if CLIENT then
 	function ROLE:AddToSettingsMenu(parent)
 		local form = vgui.CreateTTT2Form(parent, "header_roles_additional")
 
-		form:MakeSlider({
+        form:MakeSlider({
 		    serverConvar = "ttt2_roid_cbdmg",
 		    label = "label_crowbar_dmg",
 		    min = 0,
