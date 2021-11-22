@@ -72,7 +72,7 @@ if SERVER then
         }
 
 
-    return true
+        return true
     end)
 end
 
@@ -81,18 +81,18 @@ if CLIENT then
 		local form = vgui.CreateTTT2Form(parent, "header_roles_additional")
 
 		form:MakeSlider({
-			serverConvar = "ttt2_roid_cbdmg",
-			label = "Crowbar damage",
-			min = 0,
-			max = 100,
-			decimal = 0
+		    serverConvar = "ttt2_roid_cbdmg",
+		    label = "label_crowbar_dmg",
+		    min = 0,
+		    max = 100,
+		    decimal = 0
 		})
         form:MakeSlider({
-			serverConvar = "ttt2_roid_cbpush",
-			label = "Crowbar knockback multiplier",
-			min = 1,
-			max = 10,
-			decimal = 0
+		    serverConvar = "ttt2_roid_cbpush",
+		    label = "label_roider_push_multi",
+		    min = 1,
+		    max = 10,
+		    decimal = 0
 		})
 	end
 end

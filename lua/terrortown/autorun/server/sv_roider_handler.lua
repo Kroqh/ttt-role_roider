@@ -21,15 +21,4 @@ hook.Add("PlayerTakeDamage", "RoiderDamage", function(ply, inflictor, killer, am
 
 end)
 
-hook.Add("GM:TTT2PlayerPreventPush","RoiderPush", function(inflictor,ply)
-    
-    print(inflictor)
-    print(ply)
-    if not IsValid(ply) or inflictor:GetSubRole() ~= ROLE_ROIDER then return end
 
-    
-
-    
-    
-return true
-end)
