@@ -11,8 +11,7 @@ end
 hook.Add("PlayerTakeDamage", "RoiderDamage", function(ply, inflictor, killer, amount, dmginfo)
 
     if not RoiderDamageAttempt(ply, killer) then return end
-    
-    if  inflictor ~= killer and killer:GetActiveWeapon():GetClass() == "weapon_zm_improvised" then
+    if  inflictor ~= killer and inflictor:GetClass() == "weapon_zm_improvised" then
         dmginfo:SetDamage(GetConVar("ttt2_roid_cbdmg"):GetInt())
     else
     
@@ -20,4 +19,17 @@ hook.Add("PlayerTakeDamage", "RoiderDamage", function(ply, inflictor, killer, am
 	    dmginfo:SetDamage(0)
     end
 
+end)
+
+hook.Add("GM:TTT2PlayerPreventPush","RoiderPush", function(inflictor,ply)
+    
+    print(inflictor)
+    print(ply)
+    if not IsValid(ply) or inflictor:GetSubRole() ~= ROLE_ROIDER then return end
+
+    
+
+    
+    
+return true
 end)

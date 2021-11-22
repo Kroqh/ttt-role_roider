@@ -54,23 +54,28 @@ function ROLE:Initialize()
     roles.SetBaseRole(self, ROLE_TRAITOR)
 end
 
--- , "JesterPickupWeapon"
 if SERVER then
 
-    -- the roider is not able to pick up molotov cocktails or confgrenades
-   hook.Add("PlayerCanPickupWeapon", function(ply, wep)
-      if not IsValid(ply) or not IsValid(wep) or ply:GetSubRole() ~= ROLE_ROIDER then return end
+    hook.Add("TTT2PlayerPreventPush","RoiderPush", function(inflictor,ply)
+        if not IsValid(ply) or inflictor:GetSubRole() ~= ROLE_ROIDER then return end
+        
+        local tr = inflictor:GetEyeTrace(MASK_SHOT)
+        local pushvel = tr.Normal * GetConVar("ttt_crowbar_pushforce"):GetFloat() * GetConVar("ttt2_roid_cbpush"):GetInt()
+        pushvel.z = math.Clamp(pushvel.z, 50, 100) -- limit the upward force to prevent launching
 
-      if wep:GetClass() == "weapon_zm_molotov" then
-         return false
-      end
+        ply:SetVelocity(ply:GetVelocity() + pushvel)
+        inflictor:SetAnimation(PLAYER_ATTACK1)
+        ply.was_pushed = {
+            att = inflictor,
+            t = CurTime(),
+            wep = inflictor:GetActiveWeapon():GetClass(),
+        }
 
-      if wep:GetClass() == "weapon_ttt_confgrenade" then
-        return false
-      end
+
+    return true
     end)
-
 end
+
 if CLIENT then
 	function ROLE:AddToSettingsMenu(parent)
 		local form = vgui.CreateTTT2Form(parent, "header_roles_additional")
@@ -80,6 +85,13 @@ if CLIENT then
 			label = "Crowbar damage",
 			min = 0,
 			max = 100,
+			decimal = 0
+		})
+        form:MakeSlider({
+			serverConvar = "ttt2_roid_cbpush",
+			label = "Crowbar knockback multiplier",
+			min = 1,
+			max = 10,
 			decimal = 0
 		})
 	end
